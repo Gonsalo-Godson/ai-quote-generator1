@@ -28,7 +28,7 @@ resource "random_integer" "suffix" {
   max = 99999
 }
 
-# Resource group (ignore if already exists)
+# Resource group
 resource "azurerm_resource_group" "rg" {
   name     = "aiquote-static-rg"
   location = "East Asia"
@@ -46,7 +46,6 @@ resource "azurerm_storage_account" "static_sa" {
   location                 = azurerm_resource_group.rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
-  allow_blob_public_access = true
 }
 
 # Enable static website feature
@@ -56,7 +55,7 @@ resource "azurerm_storage_account_static_website" "website" {
   error_404_document = "index.html"
 }
 
-# Wait to ensure $web container is available
+# Wait for $web container to be available
 resource "null_resource" "wait_for_static_site" {
   depends_on = [azurerm_storage_account_static_website.website]
 
