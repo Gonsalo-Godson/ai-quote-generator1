@@ -16,7 +16,7 @@ pipeline {
         stage('Setup Terraform') {
             steps {
                 bat 'terraform -version'
-                bat 'cd terraform-azure-function && terraform init'
+                bat 'cd terraform-static-web && terraform init'
             }
         }
 
@@ -24,7 +24,7 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'azure-sp', usernameVariable: 'ARM_CLIENT_ID', passwordVariable: 'ARM_CLIENT_SECRET')]) {
                     bat '''
-                    cd terraform-azure-function
+                    cd terraform-static-web
                     terraform apply -auto-approve
                     '''
                 }
