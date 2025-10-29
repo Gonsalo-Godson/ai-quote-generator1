@@ -9,14 +9,31 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
+                // Clean workspace before build to ensure new files are fetched
+                deleteDir()
                 git branch: 'main', url: 'https://github.com/Gonsalo-Godson/ai-quote-generator1.git'
             }
         }
 
         stage('Setup Terraform') {
             steps {
-                bat 'terraform -version'
-                bat 'cd terraform-static-web && terraform init'
+                bat '''
+                terraform -version
+                cd terraform-static-web
+                terraform init -reconfigure
+                '''
+            }
+        }
+
+        stage('Force Redeploy Website') {
+            steps {
+                bat '''
+                cd terraform-static-web
+                terraform refresh
+                terraform taint azurerm_storage_blob.index || exit 0
+                terraform taint azurerm_storage_blob.style || exit 0
+                terraform taint azurerm_storage_blob.script || exit 0
+                '''
             }
         }
 
@@ -25,10 +42,19 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'azure-sp', usernameVariable: 'ARM_CLIENT_ID', passwordVariable: 'ARM_CLIENT_SECRET')]) {
                     bat '''
                     cd terraform-static-web
-                    terraform apply -auto-approve
+                    terraform apply -auto-approve -refresh=true
                     '''
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Deployment successful! Website updated on Azure.'
+        }
+        failure {
+            echo '❌ Deployment failed. Check Jenkins logs.'
         }
     }
 }
