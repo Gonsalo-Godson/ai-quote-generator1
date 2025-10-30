@@ -94,6 +94,17 @@ resource "azurerm_storage_blob" "script" {
   content_type           = "application/javascript"
 }
 
+resource "null_resource" "force_redeploy" {
+  triggers = {
+    always_run = timestamp()
+  }
+
+  provisioner "local-exec" {
+    command = "echo 'Redeploying website changes...'"
+  }
+}
+
+
 # ✅ Outputs
 output "resource_group_name" {
   description = "Azure Resource Group Name"
