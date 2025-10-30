@@ -1,73 +1,62 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+:root {
+  --bg: #0b1221;
+  --panel: #0f1724;
+  --accent: #ffb86b;
+  --muted: #9aa4b2;
 }
 
 body {
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
-    color: #fff;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  margin: 0;
+  background: linear-gradient(180deg, var(--bg), #071025);
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.container {
-    text-align: center;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    width: 90%;
-    max-width: 500px;
+.wrap {
+  background: var(--panel);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  width: 90%;
+  max-width: 900px;
 }
 
-h1 {
-    margin-bottom: 20px;
-    font-size: 28px;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.quote-box {
-    margin: 20px 0;
-    font-size: 20px;
-    font-style: italic;
-    transition: all 0.3s ease;
-}
-
-#author {
-    display: block;
-    margin-top: 10px;
-    font-size: 16px;
-    color: #f0f0f0;
+.hud p {
+  margin: 0 10px;
+  display: inline;
+  color: var(--accent);
 }
 
 .buttons button {
-    background-color: #fff;
-    color: #333;
-    border: none;
-    margin: 5px;
-    padding: 10px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s ease;
+  background: transparent;
+  border: 1px solid var(--muted);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.buttons button:hover {
-    background-color: #a777e3;
-    color: #fff;
+canvas {
+  background: #061024;
+  width: 100%;
+  height: 500px;
+  border-radius: 8px;
+  display: block;
+  margin: 20px 0;
 }
 
 footer {
-    position: absolute;
-    bottom: 15px;
-    font-size: 14px;
-    color: #fff;
-}
-
-footer a {
-    color: #fff;
-    text-decoration: underline;
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
 }
