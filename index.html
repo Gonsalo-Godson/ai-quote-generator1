@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quote Generator</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Block Blast</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>💭 Quote Generator</h1>
-        <div class="quote-box">
-            <p id="quote">Click below to get inspired!</p>
-            <span id="author">- Unknown</span>
-        </div>
-        <div class="buttons">
-            <button id="new-quote">Generate New Quote</button>
-            <button id="speak">🔊 Speak</button>
-            <button id="copy">📋 Copy</button>
-        </div>
-    </div>
+  <div class="wrap">
+    <header>
+      <h1>Block Blast</h1>
+      <div class="hud">
+        <p id="score">Score: 0</p>
+        <p id="lives">Lives: 3</p>
+        <p id="level">Level: 1</p>
+      </div>
+      <div class="buttons">
+        <button id="restart">Restart</button>
+        <button id="pause">Pause</button>
+      </div>
+    </header>
+
+    <canvas id="gameCanvas"></canvas>
 
     <footer>
-       Powered by <a href="https://api.quotable.io" target="_blank">Godson and team</a></p>
+      <p>Use ← → or A/D to move • Space to launch ball</p>
     </footer>
+  </div>
 
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
